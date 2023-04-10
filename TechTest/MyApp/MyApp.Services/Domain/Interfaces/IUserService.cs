@@ -11,6 +11,7 @@ namespace MyApp.Services.Domain.Interfaces
         /// </summary>
         /// <param name="isActive"></param>
         /// <returns></returns>
-        IEnumerable<User> FilterByActive(bool isActive);
+        IEnumerable<User> FilterByActive();
+        IEnumerable<User> FilterByInActive();
     }
 }

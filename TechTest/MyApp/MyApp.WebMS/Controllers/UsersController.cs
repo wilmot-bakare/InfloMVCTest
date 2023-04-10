@@ -30,5 +30,46 @@ namespace MyApp.WebMS.Controllers
 
             return View("List", model);
         }
+
+        [Route("ActiveUserList", Name = "ActiveUserList")]
+        public ActionResult ActiveUserList()
+        {
+            var items = ServiceFactory.UserService.FilterByActive().Select(p => new UserListItemViewModel
+            {
+                Id = p.Id,
+                Forename = p.Forename,
+                Surname = p.Surname,
+                Email = p.Email,
+                IsActive = p.IsActive
+            });
+
+            var model = new UserListViewModel
+            {
+                Items = items.ToList()
+            };
+
+            return View("List", model);
+        }
+
+        [Route("InActiveUserList", Name = "InActiveUserList")]
+        public ActionResult InActiveUserList()
+        {
+            var items = ServiceFactory.UserService.FilterByInActive().Select(p => new UserListItemViewModel
+            {
+                Id = p.Id,
+                Forename = p.Forename,
+                Surname = p.Surname,
+                Email = p.Email,
+                IsActive = p.IsActive
+            });
+
+            var model = new UserListViewModel
+            {
+                Items = items.ToList()
+            };
+
+            return View("List", model);
+        }
+
     }
 }

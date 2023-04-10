@@ -12,6 +12,9 @@ namespace MyApp.Services.Factories.Implementations
 
 
         private IUserService _userService;
-        public IUserService UserService => _userService ?? (_userService = new UserService(DataAccess));
+        protected IUserRepository _userRepository;
+
+        protected IUserRepository userRepository => _userRepository ?? (_userRepository = new UserRepository(DataAccess));
+        public IUserService UserService => _userService ?? (_userService = new UserService(DataAccess, userRepository));
     }
 }
