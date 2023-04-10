@@ -20,7 +20,8 @@ namespace MyApp.WebMS.Controllers
                 Forename = p.Forename,
                 Surname = p.Surname,
                 Email = p.Email,
-                IsActive = p.IsActive
+                IsActive = p.IsActive,
+                DateOfBirth = p.DateOfBirth
             });
 
             var model = new UserListViewModel
@@ -40,7 +41,8 @@ namespace MyApp.WebMS.Controllers
                 Forename = p.Forename,
                 Surname = p.Surname,
                 Email = p.Email,
-                IsActive = p.IsActive
+                IsActive = p.IsActive,
+                DateOfBirth = p.DateOfBirth
             });
 
             var model = new UserListViewModel
@@ -60,7 +62,8 @@ namespace MyApp.WebMS.Controllers
                 Forename = p.Forename,
                 Surname = p.Surname,
                 Email = p.Email,
-                IsActive = p.IsActive
+                IsActive = p.IsActive,
+                DateOfBirth = p.DateOfBirth
             });
 
             var model = new UserListViewModel

@@ -1,4 +1,5 @@
 ﻿using MyApp.Models.Base;
+using System;
 
 namespace MyApp.Models
 {
@@ -11,5 +12,6 @@ namespace MyApp.Models
         public string Email { get; set; }
 
         public bool IsActive { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

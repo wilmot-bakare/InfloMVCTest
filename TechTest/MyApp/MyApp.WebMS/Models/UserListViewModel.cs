@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 namespace MyApp.WebMS.Models
 {
     public class UserListViewModel
@@ -17,5 +18,6 @@ namespace MyApp.WebMS.Models
         public string Email { get; set; }
 
         public bool IsActive { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }
