@@ -8,6 +8,8 @@ using MyApp.WebMS.Factories;
 using Serilog;
 using Serilog.Sinks.Seq;
 using Serilog.Configuration;
+using System.Data.Entity;
+using MyApp.Data.Migrations;
 using System.Configuration;
 
 namespace MyApp.WebMS
@@ -35,7 +37,9 @@ namespace MyApp.WebMS
                 cfg.AddProfile<MappingProfile>();
             });
 
-        
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MyAppDbContext, Data.Migrations.Configuration>());
+
+
         }
 
 
