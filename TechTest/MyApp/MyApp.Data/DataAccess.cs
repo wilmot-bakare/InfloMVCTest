@@ -7,16 +7,16 @@ namespace MyApp.Data
 {
     public class DataAccess : IDataAccess
     {
-        public DataAccess(DataContext dataContext)
+        public DataAccess(MyAppDbContext dataContext)
         {
             _dataContext = dataContext;
         }
 
-        private readonly DataContext _dataContext;
+        private readonly MyAppDbContext _dataContext;
 
         public IEnumerable<TEntity> GetAll<TEntity>() where TEntity : ModelBase
         {
-            return _dataContext.Set<TEntity>().ConvertAll(p => p);
+            return _dataContext.Set<TEntity>().ToList();
         }
 
         public TEntity GetById<TEntity>(int id) where TEntity : ModelBase

@@ -9,7 +9,11 @@ namespace MyApp.WebMS.Controllers
     [RoutePrefix("users")]
     public class UsersController : BaseController
     {
-        public UsersController(IServiceFactory serviceFactory) : base(serviceFactory) { }
+        public UsersController(IServiceFactory serviceFactory) : base(serviceFactory) {
+        
+        
+        
+        }
 
         [Route("", Name = "UserList")]
         public ActionResult List()

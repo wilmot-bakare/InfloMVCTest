@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using MyApp.Data;
 using MyApp.WebMS.Factories;
 
 namespace MyApp.WebMS
@@ -13,7 +15,6 @@ namespace MyApp.WebMS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
             RegisterCustomControllerFactory();
         }
 
@@ -23,5 +24,7 @@ namespace MyApp.WebMS
         {
             ControllerBuilder.Current.SetControllerFactory(new ControllerFactory());
         }
+
+
     }
 }

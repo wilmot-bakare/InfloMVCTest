@@ -1,4 +1,5 @@
-﻿using MyApp.Services.Domain.Interfaces;
+﻿using MyApp.Data;
+using MyApp.Services.Domain.Interfaces;
 
 namespace MyApp.Services.Factories.Interfaces
 {

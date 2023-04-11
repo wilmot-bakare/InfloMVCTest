@@ -8,9 +8,9 @@ namespace MyApp.Services.Factories.Implementations
     public class ServiceFactory : IServiceFactory
     {
         private IDataAccess _dataAccess;
-        protected IDataAccess DataAccess => _dataAccess ?? (_dataAccess = new DataAccess(new DataContext()));
+        //   protected IDataAccess DataAccess => _dataAccess ?? (_dataAccess = new DataAccess(new DataContext()));
 
-
+        protected IDataAccess DataAccess => _dataAccess ?? (_dataAccess = new DataAccess(new MyAppDbContext()));
         private IUserService _userService;
         protected IUserRepository _userRepository;
 
