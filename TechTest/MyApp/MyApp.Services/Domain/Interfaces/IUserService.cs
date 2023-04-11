@@ -15,5 +15,6 @@ namespace MyApp.Services.Domain.Interfaces
         IEnumerable<User> FilterByActive();
         IEnumerable<User> FilterByInActive();
         Task<User> CreateUser(User user);
+        Task<Activity> AddActivity(Activity activity);
     }
 }

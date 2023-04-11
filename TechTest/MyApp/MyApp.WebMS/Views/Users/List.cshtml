@@ -46,7 +46,9 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">View</a></li>
+                                <li>
+                                    @Html.ActionLink("View", "Details", new { id = item.Id })
+                                </li>
                                 <li>
                                     @Html.ActionLink("Edit", "EditUser", new { id = item.Id }, new { onclick = "return confirm('Are you sure you want to edit this user?')" })
                                 </li>

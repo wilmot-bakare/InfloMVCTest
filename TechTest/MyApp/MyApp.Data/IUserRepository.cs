@@ -13,5 +13,6 @@ namespace MyApp.Data
         // Retrieves active or inactive users based on the isActive parameter.
         IEnumerable<User> FilterByActive();
         IEnumerable<User> FilterByInActive();
+        Task<Activity> AddActivity(Activity activity);
     }
 }

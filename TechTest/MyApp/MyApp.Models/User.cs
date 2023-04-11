@@ -1,5 +1,6 @@
 ﻿using MyApp.Models.Base;
 using System;
+using System.Collections.Generic;
 
 namespace MyApp.Models
 {
@@ -13,5 +14,7 @@ namespace MyApp.Models
 
         public bool IsActive { get; set; }
         public DateTime? DateOfBirth { get; set; }
+
+        public ICollection<Activity> Activities { get; set; }
     }
 }

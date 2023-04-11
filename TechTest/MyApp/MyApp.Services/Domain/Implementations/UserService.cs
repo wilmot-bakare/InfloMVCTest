@@ -40,6 +40,13 @@ namespace MyApp.Services.Domain.Implementations
             return await DataAccess.Create(user);
         }
 
+        public async  Task<Activity> AddActivity(Activity activity)
+        {
+            activity.Date = DateTime.UtcNow;
+          return await  _userRepository.AddActivity(activity);
+        }
+
+       
 
 
     }

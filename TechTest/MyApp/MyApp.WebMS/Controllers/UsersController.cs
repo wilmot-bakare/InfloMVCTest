@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -58,6 +59,7 @@ namespace MyApp.WebMS.Controllers
                 var user = Mapper.Map<User>(model);
                 ServiceFactory.UserService.CreateUser(user);
                 ViewBag.Message = "User Created Successfully";
+               
             }
             catch(Exception ex)
             {
@@ -73,7 +75,7 @@ namespace MyApp.WebMS.Controllers
         [Route("EditUser", Name = "EditUser")]
         public async Task<ActionResult> EditUser(int id)
         {
-            var res = ServiceFactory.UserService.GetById( id);
+            var res = ServiceFactory.UserService.GetById(id);
             var model = Mapper.Map<UserListItemViewModel>(res);
             return View(model);
         }
@@ -88,6 +90,22 @@ namespace MyApp.WebMS.Controllers
             {
                 ViewBag.Message = "User Created Successfully";
             }
+            try
+            {
+                Activity activity = new Activity
+                {
+                    Name = "SaveEditedUser",
+                    Description = "User was edited",
+                    UserId = user.Id
+                };
+                await ServiceFactory.UserService.AddActivity(activity);
+            }
+            catch(Exception ex)
+            {
+                //log exception
+            }
+           
+            
             return RedirectToAction("List");
         }
 
@@ -95,9 +113,36 @@ namespace MyApp.WebMS.Controllers
         [Route("DeleteUser", Name = "DeleteUser")]
         public ActionResult DeleteUser(int id)
         {
-            ServiceFactory.UserService.DeleteByID(id);
-            ViewBag.Messsage = "Record Delete Successfully";
+            try
+            {
+                ServiceFactory.UserService.DeleteByID(id);
+                ViewBag.Messsage = "Record Delete Successfully";
+            }
+            catch(Exception ex)
+            {
+                //log exception
+            }
+
             return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        [Route("Details", Name = "Details")]
+        public ActionResult Details(int id)
+        {
+            var user = ServiceFactory.UserService.GetById(id);
+            var activities = user.Activities;
+            var viewModel = new UserActivityViewModel
+            {
+                Id = user.Id,
+                Forename = user.Forename,
+                Surname = user.Surname,
+                Email = user.Email,
+                IsActive = user.IsActive,
+                DateOfBirth = user.DateOfBirth,
+                Activities = Mapper.Map<List<ActivityViewModel>>(activities)
+            };
+            return View(viewModel);
         }
     }
 }

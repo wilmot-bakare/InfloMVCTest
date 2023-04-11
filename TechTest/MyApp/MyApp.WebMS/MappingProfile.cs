@@ -18,6 +18,12 @@ namespace MyApp.WebMS
             CreateMap<IEnumerable<User>, UserListViewModel>()
        .ForMember(dest => dest.Items, opt => opt.MapFrom(src => Mapper.Map<IEnumerable<UserListItemViewModel>>(src)));
 
+            CreateMap<Activity, ActivityViewModel>();
+
+            CreateMap<User, UserActivityViewModel>()
+                .ForMember(dest => dest.Activities, opt => opt.MapFrom(src => Mapper.Map<List<ActivityViewModel>>(src.Activities)));
+
+
         }
     }
 }

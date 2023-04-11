@@ -15,5 +15,17 @@ namespace MyApp.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Activity>()
+                .HasRequired(a => a.User)
+                .WithMany(u => u.Activities)
+                .HasForeignKey(a => a.UserId)
+                .WillCascadeOnDelete(false);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

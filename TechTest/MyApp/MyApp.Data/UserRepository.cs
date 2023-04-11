@@ -26,5 +26,14 @@ namespace MyApp.Data
         {
             return this.dataAccess.GetAll<User>().Where(u => u.IsActive == false);
         }
+
+        public async Task<Activity> AddActivity(Activity activity)
+        {
+           var res =  await dataAccess.Create(activity);
+            return res;
+
+        }
+
+       
     }
 }
