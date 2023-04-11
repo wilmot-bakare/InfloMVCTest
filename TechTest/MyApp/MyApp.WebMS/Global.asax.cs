@@ -5,6 +5,10 @@ using System.Web.Routing;
 using AutoMapper;
 using MyApp.Data;
 using MyApp.WebMS.Factories;
+using Serilog;
+using Serilog.Sinks.Seq;
+using Serilog.Configuration;
+using System.Configuration;
 
 namespace MyApp.WebMS
 {
@@ -12,6 +16,14 @@ namespace MyApp.WebMS
     {
         protected void Application_Start()
         {
+            var seqServerUrl = ConfigurationManager.AppSettings["SeqServerUrl"];
+            var logConfig = new LoggerConfiguration()
+           .MinimumLevel.Debug()
+           .Enrich.FromLogContext()
+           .WriteTo.Seq(seqServerUrl);
+
+            Log.Logger = logConfig.CreateLogger();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -22,6 +34,8 @@ namespace MyApp.WebMS
             {
                 cfg.AddProfile<MappingProfile>();
             });
+
+        
         }
 
 
