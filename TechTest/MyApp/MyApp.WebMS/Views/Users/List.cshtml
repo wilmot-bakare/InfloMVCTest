@@ -34,7 +34,7 @@
                         @item.Email
                     </td>
                     <td>
-                        @item.DateOfBirth.ToString("dd-MM-yyyy")
+                        @item.DateOfBirth.GetValueOrDefault().ToString("dd-MM-yyyy")
                     </td>
                     <td>
                         @(item.IsActive ? "Yes" : "No")
@@ -65,7 +65,7 @@
             <a href="@Url.RouteUrl("InActiveUserList")" class="btn btn-default">Non Active</a>
         </div>
 
-        <a href="#" class="btn btn-primary pull-right">
+        <a href="@Url.RouteUrl("CreateUser")" class="btn btn-primary pull-right">
             <span class="glyphicon glyphicon-plus"></span> Add User
         </a>
     </div>

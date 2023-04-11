@@ -14,5 +14,6 @@ namespace MyApp.Services.Domain.Interfaces.Base
         TEntity Update(TEntity entity);
 
         void Delete(TEntity entity);
+        void DeleteByID(int id);
     }
 }

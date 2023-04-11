@@ -38,5 +38,6 @@ namespace MyApp.Data
         TEntity Update<TEntity>(TEntity entity) where TEntity : ModelBase;
 
         void Delete<TEntity>(TEntity entity) where TEntity : ModelBase;
+        void DeleteByID<TEntity>(int id) where TEntity : ModelBase;
     }
 }

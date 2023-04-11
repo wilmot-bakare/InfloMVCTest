@@ -13,5 +13,6 @@ namespace MyApp.Services.Domain.Interfaces
         /// <returns></returns>
         IEnumerable<User> FilterByActive();
         IEnumerable<User> FilterByInActive();
+        User CreateUser(User user);
     }
 }

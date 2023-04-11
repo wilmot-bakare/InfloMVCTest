@@ -34,6 +34,11 @@ namespace MyApp.Services.Domain.Implementations
             return _userRepository.FilterByInActive();
         }
 
+        public User CreateUser(User user)
+        {
+            return DataAccess.Create(user);
+        }
+
 
 
     }

@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using MyApp.Models;
 using MyApp.Services.Factories.Interfaces;
 using MyApp.WebMS.Controllers.Base;
 using MyApp.WebMS.Models;
@@ -18,65 +21,83 @@ namespace MyApp.WebMS.Controllers
         [Route("", Name = "UserList")]
         public ActionResult List()
         {
-            var items = ServiceFactory.UserService.GetAll().Select(p => new UserListItemViewModel
-            {
-                Id = p.Id,
-                Forename = p.Forename,
-                Surname = p.Surname,
-                Email = p.Email,
-                IsActive = p.IsActive,
-                DateOfBirth = p.DateOfBirth
-            });
-
-            var model = new UserListViewModel
-            {
-                Items = items.ToList()
-            };
-
+            var items = ServiceFactory.UserService.GetAll();
+            var model = Mapper.Map<UserListViewModel>(items);
             return View("List", model);
         }
 
         [Route("ActiveUserList", Name = "ActiveUserList")]
         public ActionResult ActiveUserList()
         {
-            var items = ServiceFactory.UserService.FilterByActive().Select(p => new UserListItemViewModel
-            {
-                Id = p.Id,
-                Forename = p.Forename,
-                Surname = p.Surname,
-                Email = p.Email,
-                IsActive = p.IsActive,
-                DateOfBirth = p.DateOfBirth
-            });
-
-            var model = new UserListViewModel
-            {
-                Items = items.ToList()
-            };
-
+            var items = ServiceFactory.UserService.FilterByActive();
+            var model = Mapper.Map<UserListViewModel>(items);
             return View("List", model);
         }
 
         [Route("InActiveUserList", Name = "InActiveUserList")]
         public ActionResult InActiveUserList()
         {
-            var items = ServiceFactory.UserService.FilterByInActive().Select(p => new UserListItemViewModel
-            {
-                Id = p.Id,
-                Forename = p.Forename,
-                Surname = p.Surname,
-                Email = p.Email,
-                IsActive = p.IsActive,
-                DateOfBirth = p.DateOfBirth
-            });
-
-            var model = new UserListViewModel
-            {
-                Items = items.ToList()
-            };
-
+            var items = ServiceFactory.UserService.FilterByInActive();
+            var model = Mapper.Map<UserListViewModel>(items);
             return View("List", model);
         }
 
+        [Route("CreateUser", Name = "CreateUser")]
+        public ActionResult CreateUser()
+        {
+            return View("CreateUser");
+        }
+
+        [HttpPost]
+        [Route("AddUser", Name = "AddUser")]
+        public ActionResult AddUser(UserListItemViewModel model)
+        {
+            try
+            {
+                var user = Mapper.Map<User>(model);
+                ServiceFactory.UserService.CreateUser(user);
+                ViewBag.Message = "User Created Successfully";
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Message = "An Error occured. Please try again";
+            }
+           
+            ModelState.Clear();
+            return View("CreateUser");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var res = ServiceFactory.UserService.GetById( id);
+            var model = Mapper.Map<UserListViewModel>(res);
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("EditUser", Name = "EditUser")]
+        public ActionResult Edit(UserListItemViewModel model)
+        {
+            var user = Mapper.Map<User>(model);
+            var res = ServiceFactory.UserService.Update(user);
+            if (res != null)
+            {
+                ViewBag.Message = "User Created Successfully";
+            }
+
+            return RedirectToAction("List");
+        }
+
+
+        [HttpPost]
+        [Route("DeleteUser", Name = "DeleteUser")]
+        public ActionResult Delete(UserListItemViewModel model)
+        {
+            var user = Mapper.Map<User>(model);
+            ServiceFactory.UserService.Delete(user);
+            ViewBag.Messsage = "Record Delete Successfully";
+            return RedirectToAction("index");
+        }
     }
 }

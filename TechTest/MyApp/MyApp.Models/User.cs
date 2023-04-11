@@ -12,6 +12,6 @@ namespace MyApp.Models
         public string Email { get; set; }
 
         public bool IsActive { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
     }
 }

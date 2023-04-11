@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace MyApp.WebMS.Models
 {
     public class UserListViewModel
@@ -10,14 +12,18 @@ namespace MyApp.WebMS.Models
     public class UserListItemViewModel
     {
         public long Id { get; set; }
-
+        [Required]
         public string Forename { get; set; }
-
+        [Required]
         public string Surname { get; set; }
-
+        [Required]
         public string Email { get; set; }
 
         public bool IsActive { get; set; }
-        public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        public DateTime? DateOfBirth { get; set; }
     }
 }

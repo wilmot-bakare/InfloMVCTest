@@ -39,5 +39,10 @@ namespace MyApp.Services.Domain.Implementations.Base
         {
             DataAccess.Delete(entity);
         }
+
+        public void DeleteByID(int id)
+        {
+            DataAccess.DeleteByID<TEntity>(id);
+        }
     }
 }

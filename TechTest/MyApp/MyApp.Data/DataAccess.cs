@@ -26,45 +26,42 @@ namespace MyApp.Data
 
         public TEntity Create<TEntity>(TEntity entity) where TEntity : ModelBase
         {
-            var items = this.GetAll<TEntity>();
-
-            // Mimic database auto ID assigning
-            entity.Id = items.Max(p => p.Id) + 1; 
-
             _dataContext.Set<TEntity>().Add(entity);
-
+            _dataContext.SaveChangesAsync();
             return entity;
         }
 
         public TEntity Update<TEntity>(TEntity entity) where TEntity : ModelBase
         {
-            var originalEtity = GetAll<TEntity>().FirstOrDefault(p => p.Id.Equals(entity.Id));
+            var dbEntity = _dataContext.Set<TEntity>().Find(entity.Id);
 
-            if (originalEtity == null)
+            if (dbEntity == null)
             {
                 throw new NullReferenceException("The entity does not exist in the data store");
             }
-
-            // remove the original entity
-            _dataContext.Set<TEntity>().Remove(originalEtity);
-
-            // add the updated entity
-            _dataContext.Set<TEntity>().Add(entity);
-
-            return entity;
+            _dataContext.Entry(dbEntity).CurrentValues.SetValues(entity);
+            _dataContext.SaveChangesAsync();
+            return dbEntity;
         }
 
         public void Delete<TEntity>(TEntity entity) where TEntity : ModelBase
         {
-            var originalEtity = GetAll<TEntity>().FirstOrDefault(p => p.Id.Equals(entity.Id));
+            var dbSet = _dataContext.Set<TEntity>();
+            var originalEntity = dbSet.Find(entity.Id);
+            dbSet.Remove(originalEntity);
+            _dataContext.SaveChanges();
+        }
 
-            if (originalEtity == null)
+        public void DeleteByID<TEntity>(int id) where TEntity : ModelBase
+        {
+            var entity = _dataContext.Set<TEntity>().Find(id);
+            if (entity == null)
             {
                 throw new NullReferenceException("The entity does not exist in the data store");
             }
 
-            // remove the original entity
-            _dataContext.Set<TEntity>().Remove(originalEtity);
+            _dataContext.Set<TEntity>().Remove(entity);
+            _dataContext.SaveChanges();
         }
     }
 }
