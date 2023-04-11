@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MyApp.Data;
 using MyApp.Models;
 using MyApp.Services.Domain.Implementations.Base;
@@ -34,9 +35,9 @@ namespace MyApp.Services.Domain.Implementations
             return _userRepository.FilterByInActive();
         }
 
-        public User CreateUser(User user)
+        public async Task<User> CreateUser(User user)
         {
-            return DataAccess.Create(user);
+            return await DataAccess.Create(user);
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MyApp.Models;
 using MyApp.Services.Domain.Interfaces.Base;
 
@@ -13,6 +14,6 @@ namespace MyApp.Services.Domain.Interfaces
         /// <returns></returns>
         IEnumerable<User> FilterByActive();
         IEnumerable<User> FilterByInActive();
-        User CreateUser(User user);
+        Task<User> CreateUser(User user);
     }
 }

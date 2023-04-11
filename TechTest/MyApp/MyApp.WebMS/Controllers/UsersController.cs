@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
 using MyApp.Models;
@@ -67,37 +68,36 @@ namespace MyApp.WebMS.Controllers
             return View("CreateUser");
         }
 
+
         [HttpGet]
-        public ActionResult Edit(int id)
+        [Route("EditUser", Name = "EditUser")]
+        public async Task<ActionResult> EditUser(int id)
         {
             var res = ServiceFactory.UserService.GetById( id);
-            var model = Mapper.Map<UserListViewModel>(res);
+            var model = Mapper.Map<UserListItemViewModel>(res);
             return View(model);
         }
 
         [HttpPost]
-        [Route("EditUser", Name = "EditUser")]
-        public ActionResult Edit(UserListItemViewModel model)
+        [Route("SaveEditedUser", Name = "SaveEditedUser")]
+        public async Task<ActionResult> SaveEditedUser(UserListItemViewModel model)
         {
             var user = Mapper.Map<User>(model);
-            var res = ServiceFactory.UserService.Update(user);
+            var res = await ServiceFactory.UserService.Update(user);
             if (res != null)
             {
                 ViewBag.Message = "User Created Successfully";
             }
-
             return RedirectToAction("List");
         }
 
 
-        [HttpPost]
         [Route("DeleteUser", Name = "DeleteUser")]
-        public ActionResult Delete(UserListItemViewModel model)
+        public ActionResult DeleteUser(int id)
         {
-            var user = Mapper.Map<User>(model);
-            ServiceFactory.UserService.Delete(user);
+            ServiceFactory.UserService.DeleteByID(id);
             ViewBag.Messsage = "Record Delete Successfully";
-            return RedirectToAction("index");
+            return RedirectToAction("List");
         }
     }
 }

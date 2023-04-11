@@ -15,6 +15,5 @@ namespace MyApp.Data
         }
 
         public DbSet<User> Users { get; set; }
-
     }
 }

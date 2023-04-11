@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MyApp.Models.Base;
 
 namespace MyApp.Data
@@ -16,31 +17,30 @@ namespace MyApp.Data
 
         public IEnumerable<TEntity> GetAll<TEntity>() where TEntity : ModelBase
         {
-            return _dataContext.Set<TEntity>().ToList();
+            return _dataContext.Set<TEntity>().AsQueryable();
         }
 
         public TEntity GetById<TEntity>(int id) where TEntity : ModelBase
         {
-            return GetAll<TEntity>().FirstOrDefault(p => p.Id.Equals(id));
+            return _dataContext.Set<TEntity>().Find(id);
         }
 
-        public TEntity Create<TEntity>(TEntity entity) where TEntity : ModelBase
+        public async Task<TEntity> Create<TEntity>(TEntity entity) where TEntity : ModelBase
         {
             _dataContext.Set<TEntity>().Add(entity);
-            _dataContext.SaveChangesAsync();
+           await  _dataContext.SaveChangesAsync();
             return entity;
         }
 
-        public TEntity Update<TEntity>(TEntity entity) where TEntity : ModelBase
+        public async Task<TEntity> Update<TEntity>(TEntity entity) where TEntity : ModelBase
         {
             var dbEntity = _dataContext.Set<TEntity>().Find(entity.Id);
-
             if (dbEntity == null)
             {
                 throw new NullReferenceException("The entity does not exist in the data store");
             }
             _dataContext.Entry(dbEntity).CurrentValues.SetValues(entity);
-            _dataContext.SaveChangesAsync();
+            await _dataContext.SaveChangesAsync();
             return dbEntity;
         }
 

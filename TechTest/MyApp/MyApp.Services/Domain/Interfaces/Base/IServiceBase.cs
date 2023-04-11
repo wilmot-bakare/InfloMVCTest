@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MyApp.Models.Base;
 
 namespace MyApp.Services.Domain.Interfaces.Base
@@ -9,9 +10,9 @@ namespace MyApp.Services.Domain.Interfaces.Base
 
         TEntity GetById(int id);
 
-        TEntity Create(TEntity entity);
+        Task<TEntity> Create(TEntity entity);
 
-        TEntity Update(TEntity entity);
+        Task<TEntity> Update(TEntity entity);
 
         void Delete(TEntity entity);
         void DeleteByID(int id);
