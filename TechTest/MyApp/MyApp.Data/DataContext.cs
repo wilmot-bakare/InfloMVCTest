@@ -26,10 +26,12 @@ namespace MyApp.Data
         {
             Users = new List<User>
             {
-                new User { Id = 1, Forename = "Grant", Surname = "Cooper", Email = "grant.cooper@example.com", IsActive = true },
-                new User { Id = 2, Forename = "Tom", Surname = "Gathercole", Email = "tom.gathercole@example.com", IsActive = true },
-                new User { Id = 3, Forename = "Mark", Surname = "Edmondson", Email = "mark.edmondson@example.com", IsActive = true },
-                new User { Id = 4, Forename = "Graham", Surname = "Clark", Email = "graham.clark@example.com", IsActive = true }
+                new User { Id = 1, Forename = "Grant", Surname = "Cooper", Email = "grant.cooper@example.com",  DateOfBirth = new DateTime(2000, 11, 07), IsActive = true },
+                new User { Id = 2, Forename = "Tom", Surname = "Gathercole", Email = "tom.gathercole@example.com",DateOfBirth = new DateTime(1990, 12, 24) , IsActive = true},
+                new User { Id = 3, Forename = "Mark", Surname = "Edmondson", Email = "mark.edmondson@example.com",DateOfBirth = new DateTime(1976, 05, 13), IsActive = true },
+                new User { Id = 4, Forename = "Graham", Surname = "Clark", Email = "graham.clark@example.com",DateOfBirth = new DateTime(1988, 01, 30), IsActive = true },
+                new User { Id = 5, Forename = "Will", Surname = "Bakare", Email = "will.bakare@example.com", DateOfBirth = new DateTime(1995, 10, 05), IsActive = false },
+                new User { Id = 6, Forename = "Bill", Surname = "Bakare", Email = "Bill.bakare@example.com",DateOfBirth = new DateTime(2012, 09, 22), IsActive = false }
             };
         }
 

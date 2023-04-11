@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MyApp.Models.Base;
 
 namespace MyApp.Data
@@ -26,7 +27,7 @@ namespace MyApp.Data
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
-        TEntity Create<TEntity>(TEntity entity) where TEntity : ModelBase;
+        Task<TEntity> Create<TEntity>(TEntity entity) where TEntity : ModelBase;
 
 
         /// <summary>
@@ -35,8 +36,9 @@ namespace MyApp.Data
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entity"></param>
         /// <returns></returns>
-        TEntity Update<TEntity>(TEntity entity) where TEntity : ModelBase;
+        Task<TEntity> Update<TEntity>(TEntity entity) where TEntity : ModelBase;
 
         void Delete<TEntity>(TEntity entity) where TEntity : ModelBase;
+        void DeleteByID<TEntity>(int id) where TEntity : ModelBase;
     }
 }

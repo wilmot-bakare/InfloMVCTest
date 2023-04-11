@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MyApp.Models;
 using MyApp.Services.Domain.Interfaces.Base;
 
@@ -11,6 +12,9 @@ namespace MyApp.Services.Domain.Interfaces
         /// </summary>
         /// <param name="isActive"></param>
         /// <returns></returns>
-        IEnumerable<User> FilterByActive(bool isActive);
+        IEnumerable<User> FilterByActive();
+        IEnumerable<User> FilterByInActive();
+        Task<User> CreateUser(User user);
+        Task<Activity> AddActivity(Activity activity);
     }
 }

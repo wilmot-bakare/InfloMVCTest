@@ -1,0 +1,49 @@
+﻿@model MyApp.WebMS.Models.UserActivityViewModel
+
+<h2>User Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>Id:</dt>
+        <dd>@Model.Id</dd>
+
+        <dt>Forename:</dt>
+        <dd>@Model.Forename</dd>
+
+        <dt>Surname:</dt>
+        <dd>@Model.Surname</dd>
+
+        <dt>Email:</dt>
+        <dd>@Model.Email</dd>
+
+        <dt>Is Active:</dt>
+        <dd>@Model.IsActive</dd>
+
+        <dt>Date of Birth:</dt>
+        <dd>@Model.DateOfBirth</dd>
+    </dl>
+</div>
+
+@if (Model.Activities != null && Model.Activities.Any())
+{
+    <h2>Activities</h2>
+
+    <ul>
+        @foreach (var activity in Model.Activities)
+        {
+            <li>
+                <dl class="dl-horizontal">
+                    <dt>Name:</dt>
+                    <dd>@activity.Name</dd>
+
+                    <dt>Description:</dt>
+                    <dd>@activity.Description</dd>
+                </dl>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No activities found for this user.</p>
+}

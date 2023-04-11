@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MyApp.Data;
 using MyApp.Models.Base;
 using MyApp.Services.Domain.Interfaces.Base;
@@ -25,19 +26,24 @@ namespace MyApp.Services.Domain.Implementations.Base
             return DataAccess.GetById<TEntity>(id);
         }
 
-        public virtual TEntity Create(TEntity entity)
+        public async virtual Task<TEntity> Create(TEntity entity)
         {
-            return DataAccess.Create(entity);
+            return await DataAccess.Create(entity);
         }
 
-        public virtual TEntity Update(TEntity entity)
+        public async virtual Task<TEntity> Update(TEntity entity)
         {
-            return DataAccess.Update(entity);
+            return await DataAccess.Update(entity);
         }
 
         public virtual void Delete(TEntity entity)
         {
             DataAccess.Delete(entity);
+        }
+
+        public void DeleteByID(int id)
+        {
+            DataAccess.DeleteByID<TEntity>(id);
         }
     }
 }

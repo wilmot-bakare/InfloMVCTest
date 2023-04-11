@@ -1,31 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
 namespace MyApp.WebMS.Models
 {
-    public class UserListViewModel
+    public class UserActivityViewModel
     {
-        public IList<UserListItemViewModel> Items { get; set; } 
-    }
 
-    public class UserListItemViewModel
-    {
         public long Id { get; set; }
-        [Required]
         public string Forename { get; set; }
-        [Required]
         public string Surname { get; set; }
-        [Required]
         public string Email { get; set; }
-
         public bool IsActive { get; set; }
-
-        [Required]
-        [Display(Name = "Date of Birth")]
-        [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
-
+        public List<ActivityViewModel> Activities { get; set; }
 
     }
+
+
 }
